@@ -13,7 +13,7 @@ class Main extends Component {
         selectedDish: null
     };
   }
-
+ 
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId});
   }
@@ -27,8 +27,8 @@ class Main extends Component {
           </div>
         </Navbar>
         <div className="container">
-            <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} selectedDish={this.state.dishes.filter((dish) => (dish.id === this.state.selectedDish))[0]} />
             <div className="row">
+                <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} selectedDish={this.state.dishes.filter((dish) => (dish.id === this.state.selectedDish))[0]} />
                 <DishDetail selectedDish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
             </div>
         </div>
