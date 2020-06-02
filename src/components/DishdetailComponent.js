@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardTitle , ListGroup, ListGroupItem} from "reactstrap";
+import {Card, CardBody, CardImg, CardTitle, ListGroup, ListGroupItem, CardText} from "reactstrap";
 
 
 
@@ -43,16 +43,41 @@ function RenderDish({dish}) {
         );
     }else{
         return(
-            <div></div>
+            <>
+
+            </>
+        );
+    }
+}
+
+function RenderDishDetail({dish}) {
+    if(dish!=null){
+    return(
+        <Card>
+            <CardImg top src={dish.image} alt={dish.name} />
+            <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+                <CardText>{dish.description}</CardText>
+            </CardBody>
+        </Card>
+    );}else{
+        return (
+            <></>
         );
     }
 }
 
 const Dishdetail = (props) => {
     return (
-        <div className="col-12 col-md-5 m-1">
-            <RenderDish dish = {props.selectedDish} />
-        </div>
+        <>
+            <div className="col-12 col-md-5 m-1">
+                <RenderDishDetail dish = {props.selectedDish} />
+            </div>
+            <div className="col-12 col-md-5 m-1">
+                <RenderDish dish = {props.selectedDish} />
+            </div>
+
+        </>
     );
 }
 

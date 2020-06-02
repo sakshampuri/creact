@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardImg, CardBody, CardTitle, CardText, CardImgOverlay } from "reactstrap";
+import { Card, CardImg, CardTitle, CardImgOverlay } from "reactstrap";
 
   
     function RenderMenuItem({dish, onClick}) {
@@ -13,17 +13,6 @@ import { Card, CardImg, CardBody, CardTitle, CardText, CardImgOverlay } from "re
       );
     }
 
-    // function RenderDish(props) {
-    //   return(
-    //           <Card>
-    //               <CardImg top src={props.dish.image} alt={props.dish.name} />
-    //               <CardBody>
-    //                 <CardTitle>{props.dish.name}</CardTitle>
-    //                 <CardText>{props.dish.description}</CardText>
-    //               </CardBody>
-    //           </Card>
-    //   );
-    // }
 
 
     const Menu = (props) => {
@@ -43,7 +32,7 @@ import { Card, CardImg, CardBody, CardTitle, CardText, CardImgOverlay } from "re
                 <div className="row">
                       {menu}
                       <div className="col-12 col-md-5 m-1">
-                        {/* <RenderDish dish = {props.selectedDish} /> */}
+                         {/*<RenderDish dish = {props.selectedDish} />*/}
                       </div>
                 </div>
             </div>
