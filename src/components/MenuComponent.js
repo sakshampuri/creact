@@ -31,9 +31,6 @@ import { Card, CardImg, CardTitle, CardImgOverlay } from "reactstrap";
             <div className="container">
                 <div className="row">
                       {menu}
-                      <div className="col-12 col-md-5 m-1">
-                         {/*<RenderDish dish = {props.selectedDish} />*/}
-                      </div>
                 </div>
             </div>
         );
