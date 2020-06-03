@@ -24,10 +24,6 @@ class Main extends Component {
     };
     this.HomePage = this.HomePage.bind(this);
   }
- 
-  onDishSelect(dishId) {
-    this.setState({ selectedDish: dishId});
-  }
 
      HomePage() {
         return(
@@ -40,30 +36,34 @@ class Main extends Component {
     }
 
   render() {
+
+      const DishWithId = ({match}) => {
+          return(
+              <DishDetail selectedDish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
+                          comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+          );
+      };
+
     return (
+
       <div>
 
             <Header/>
 
             <Switch>
                 <Route path='/home' component={this.HomePage}/>
-                <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />}/>
+                <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes}/>}/>
+                <Route path='/menu/:dishId' component={DishWithId} />
                 <Route path='/contactus' component={Contact}/>
                 <Redirect to="/menu"/>
             </Switch>
-
-            {/*<div className="container">*/}
-            {/*    <div className="row">*/}
-            {/*        <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} selectedDish={this.state.dishes.filter((dish) => (dish.id === this.state.selectedDish))[0]} />*/}
-            {/*        <DishDetail selectedDish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />*/}
-            {/*    </div>*/}
-            {/*</div>*/}
 
             <div className="mt-3 ">
                 <Footer />
             </div>
 
       </div>
+
     );
   }
 }

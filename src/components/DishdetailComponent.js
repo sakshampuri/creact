@@ -1,5 +1,16 @@
 import React from 'react';
-import {Card, CardBody, CardImg, CardTitle, ListGroup, ListGroupItem, CardText} from "reactstrap";
+import {
+    Card,
+    CardBody,
+    CardImg,
+    CardTitle,
+    ListGroup,
+    ListGroupItem,
+    CardText,
+    BreadcrumbItem,
+    Breadcrumb
+} from "reactstrap";
+import {Link} from "react-router-dom";
 
 
 
@@ -29,14 +40,14 @@ function RenderComments({comments}) {
 
 } 
 
-function RenderDish({dish}) {
+function RenderDish({dish, comments}) {
     if(dish != null) {
         return(
             <Card>
                 <CardBody>
                     <CardTitle><h4>Comments</h4></CardTitle>
                     <CardBody>
-                        <RenderComments comments = {dish.comments} />
+                        <RenderComments comments = {comments} />
                     </CardBody>
                 </CardBody>
             </Card>
@@ -69,15 +80,27 @@ function RenderDishDetail({dish}) {
 
 const Dishdetail = (props) => {
     return (
-        <>
-            <div className="col-12 col-md-5 m-1">
-                <RenderDishDetail dish = {props.selectedDish} />
-            </div>
-            <div className="col-12 col-md-5 m-1">
-                <RenderDish dish = {props.selectedDish} />
-            </div>
+        <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>{props.selectedDish.name}</BreadcrumbItem>
+                </Breadcrumb>
 
-        </>
+                <div className="col-12">
+                    <h4>Details</h4>
+                </div>
+            </div>
+            <div className="row">
+
+                <div className="col-12 col-md-5 m-1">
+                    <RenderDishDetail dish = {props.selectedDish} />
+                </div>
+                <div className="col-12 col-md-5 m-1">
+                    <RenderDish dish = {props.selectedDish} comments={props.comments}/>
+                </div>
+            </div>
+        </div>
     );
 }
 
