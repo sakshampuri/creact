@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Header extends Component {
     constructor(props) {
@@ -28,16 +29,16 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
-                                    <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                                    <NavLink className="nav-link"  to='/home'><FontAwesomeIcon icon = "home" className="mr-1"/>Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
+                                    <NavLink className="nav-link" to='/aboutus'><FontAwesomeIcon icon = "info" className="mr-1"/>About Us</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link"  to='/menu'><span className="fa fa-list fa-lg"></span> Menu</NavLink>
+                                    <NavLink className="nav-link"  to='/menu'><FontAwesomeIcon icon = "list" className="mr-1"/> Menu</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
+                                    <NavLink className="nav-link" to='/contactus'><FontAwesomeIcon icon = "phone" className="mr-1"/> Contact Us</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
