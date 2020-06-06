@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom';
 import {Control, Errors, LocalForm} from "react-redux-form";
 
 //check functions
-const required = val => val && val.length;
-const maxLength = len => val => !val || val.length <= len;
-const minLength = len => val => val && val.length >= len;
+export const required = val => val && val.length;
+export const maxLength = len => val => !val || val.length <= len;
+export const minLength = len => val => val && val.length >= len;
 const isNumber = val => !isNaN(Number(val));
 const emailRegex = /\w+@\w+\.\w+/;
 const validEmail = val => emailRegex.test(val);
