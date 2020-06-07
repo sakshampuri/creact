@@ -51,9 +51,8 @@ function RenderComments({comments}) {
 
 }
 
-function handleSubmit(values) {
-    console.log(JSON.stringify(values));
-    alert(JSON.stringify(values));
+function handleSubmit(values, addComment, dishId) {
+    addComment(dishId, values.rating, values.author, values.comment);
 }
 
 function getRatings(n) {
@@ -66,7 +65,7 @@ function getRatings(n) {
     return (r);
 }
 
-function CommentModal({state}) {
+function CommentModal({state, addComment, dishId}) {
 
     return (
         <>
@@ -78,7 +77,7 @@ function CommentModal({state}) {
 
 
                 <div className="container">
-                    <LocalForm onSubmit={(values) => handleSubmit(values)}>
+                    <LocalForm onSubmit={(values) => handleSubmit(values, addComment, dishId)}>
 
                         <ModalBody>
                             <Row className={'form-group'}>
@@ -89,8 +88,8 @@ function CommentModal({state}) {
                             </Row>
 
                             <Row className={'form-group'}>
-                                <Label htmlFor={'name'}>Your Name</Label>
-                                <Control.text model={'.name'} className={'form-control'}
+                                <Label htmlFor={'author'}>Your Name</Label>
+                                <Control.text model={'.author'} className={'form-control'}
                                               placeholder={'Your Name'}
                                               validators={
                                                   {
@@ -99,7 +98,7 @@ function CommentModal({state}) {
                                                       maxLength: maxLength(15),
                                                   }
                                               }/>
-                                <Errors model={'.name'} className={'text-danger'}
+                                <Errors model={'.author'} className={'text-danger'}
                                         show={'touched'}
                                         messages={{
                                             required: 'Required',
@@ -109,9 +108,12 @@ function CommentModal({state}) {
                             </Row>
                             <Row className={'form-group'}>
                                 <Label htmlFor="message">Comment</Label>
-                                <Control.textarea model=".message" id="message" name="message"
+                                <Control.textarea model=".comment" id="message" name="message"
+                                                  validators={{required}}
                                                   rows="6"
                                                   className="form-control"/>
+                              <Errors model={'.comment'} className={'text-danger'}
+                                        show={'touched'} messages={{required: 'Required'}}/>
 
                             </Row>
                         </ModalBody>
@@ -208,7 +210,8 @@ const Dishdetail = (props) => {
 
             </div>
 
-            <CommentModal state={{commentState: isCommentModalOpen, toggle}}/>
+            <CommentModal state={{commentState: isCommentModalOpen, toggle}}
+                          addComment = {props.addComment} dishId = {props.selectedDish.id}/>
 
         </div>
     );
