@@ -7,7 +7,7 @@ export const Comments = (state = COMMENTS, action) => {
             let comment = action.payload;
             comment.id = state.length;
             comment.date = new Date().toISOString();
-            return state.concat(comment);
+            return Object.assign([], state, state.concat(comment));
         default:
             return state;
     }
