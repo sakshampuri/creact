@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
     Card,
     CardBody,
@@ -13,7 +13,7 @@ import {
     ModalBody,
     ModalHeader,
     Row,
-    Label, Col
+    Label
 } from "reactstrap";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
