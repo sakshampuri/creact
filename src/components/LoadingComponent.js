@@ -4,12 +4,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 export const Loading = () => {
     return (
         <div className="col-12">
-            <FontAwesomeIcon icon={['fas','spinner']}
-                             pulse={true}
-                             size={'6x'}
-                             color={'primary'}
-            />
-            <p>Loading...</p>
+            <div className="offset-md-6">
+                <FontAwesomeIcon icon={['fas','spinner']}
+                                 pulse
+                                 size={'6x'}
+                                 color={'primary'}
+                                 speed={'3x'}
+                                 className={'text-primary'}
+                />
+                <h5>Loading...</h5>
+            </div>
         </div>
     );
 }
