@@ -20,6 +20,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LocalForm, Control, Errors} from 'react-redux-form';
 import ModalFooter from "reactstrap/es/ModalFooter";
 import {required, maxLength, minLength} from "./ContactComponent";
+import {Loading} from "./LoadingComponent";
 
 function RenderComments({comments}) {
 
@@ -183,6 +184,24 @@ function RenderDishDetail({dish}) {
 const Dishdetail = (props) => {
 
     const [isCommentModalOpen, toggleModal] = useState(false);
+
+    if(props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }else if (props.errMess)  {
+        return(
+            <div className="container">
+                <div className="row">
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
 
     const toggle = () => toggleModal(!isCommentModalOpen);
 
