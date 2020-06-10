@@ -21,6 +21,7 @@ import {LocalForm, Control, Errors} from 'react-redux-form';
 import ModalFooter from "reactstrap/es/ModalFooter";
 import {required, maxLength, minLength} from "./ContactComponent";
 import {Loading} from "./LoadingComponent";
+import {baseUrl} from "../shared/baseUrl";
 
 function RenderComments({comments}) {
 
@@ -167,7 +168,7 @@ function RenderDishDetail({dish}) {
     if (dish != null) {
         return (
             <Card>
-                <CardImg top src={dish.image} alt={dish.name}/>
+                <CardImg top src={baseUrl + dish.image} alt={dish.name}/>
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
