@@ -10,6 +10,7 @@ import Contact from "./ContactComponent";
 import {connect} from 'react-redux';
 import {fetchComments, fetchDishes, fetchPromos, postComment} from "../redux/ActionCreators";
 import {actions} from "react-redux-form";
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 const mapStateToProps = (state) => (
    {
@@ -73,19 +74,22 @@ class Main extends Component {
       <div>
 
             <Header/>
+            <TransitionGroup>
+                <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+                    <Switch location={this.props.location}>
+                        <Route path='/home' component={this.HomePage}/>
+                        <Route path='/aboutus' render={() => <About leaders = {this.props.leaders} />} />
+                        <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes}/>}/>
+                        <Route path='/menu/:dishId' component={DishWithId} />
+                        <Route path='/contactus' component={
+                            () => <Contact resetFeedbackForm = {this.props.resetFeedbackForm}/>
+                        }/>
+                        <Redirect to="/home"/>
+                    </Switch>
+                </CSSTransition>
+            </TransitionGroup>
 
-            <Switch>
-                <Route path='/home' component={this.HomePage}/>
-                <Route path='/aboutus' render={() => <About leaders = {this.props.leaders} />} />
-                <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes}/>}/>
-                <Route path='/menu/:dishId' component={DishWithId} />
-                <Route path='/contactus' component={
-                    () => <Contact resetFeedbackForm = {this.props.resetFeedbackForm}/>
-                }/>
-                <Redirect to="/home"/>
-            </Switch>
-
-            <div className="mt-3 ">
+            <div className="mt-3 footer">
                 <Footer />
             </div>
 
