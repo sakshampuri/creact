@@ -53,7 +53,8 @@ function RenderComments({comments}) {
 
 }
 
-function handleSubmit(values, addComment, dishId) {
+function handleSubmit(values, addComment, dishId, toggle) {
+    toggle();
     addComment(dishId, values.rating, values.author, values.comment);
 }
 
@@ -79,7 +80,7 @@ function CommentModal({state, addComment, dishId}) {
 
 
                 <div className="container">
-                    <LocalForm onSubmit={(values) => handleSubmit(values, addComment, dishId)}>
+                    <LocalForm onSubmit={(values) => handleSubmit(values, addComment, dishId, state.toggle)}>
 
                         <ModalBody>
                             <Row className={'form-group'}>
