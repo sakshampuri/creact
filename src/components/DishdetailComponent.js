@@ -22,23 +22,33 @@ import ModalFooter from "reactstrap/es/ModalFooter";
 import {required, maxLength, minLength} from "./ContactComponent";
 import {Loading} from "./LoadingComponent";
 import {baseUrl} from "../shared/baseUrl";
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 function RenderComments({comments}) {
 
     if (comments != null) {
-        const commentsRendered = comments.map(
-            (comment) => {
-                return (
-                    <li key={comments.id} className="list-unstyled">
-                        <p>{comment.comment}</p>
-                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: '2-digit'
-                        }).format(new Date(Date.parse(comment.date)))}</p>
-                    </li>
-                );
+        const commentsRendered =
+            (
+                <Stagger in>
+                {
+                    comments.map(
+                        (comment) => {
+                            return (
+                                <Fade in>
+                                    <li key={comments.id} className="list-unstyled">
+                                        <p>{comment.comment}</p>
+                                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', {
+                                            year: 'numeric',
+                                            month: 'short',
+                                            day: '2-digit'
+                                        }).format(new Date(Date.parse(comment.date)))}</p>
+                                    </li>
+                                </Fade>
+                            );
+                        }
+                    )
             }
+            </Stagger>
         );
         return (
             <ListGroup>
@@ -168,13 +178,17 @@ function RenderDish({dish, comments, state}) {
 function RenderDishDetail({dish}) {
     if (dish != null) {
         return (
-            <Card>
-                <CardImg top src={baseUrl + dish.image} alt={dish.name}/>
-                <CardBody>
-                    <CardTitle>{dish.name}</CardTitle>
-                    <CardText>{dish.description}</CardText>
-                </CardBody>
-            </Card>
+            <FadeTransform in tranformProps = {{
+                exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
+                <Card>
+                    <CardImg top src={baseUrl + dish.image} alt={dish.name}/>
+                    <CardBody>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            </FadeTransform>
         );
     } else {
         return (

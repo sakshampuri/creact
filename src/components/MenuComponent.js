@@ -3,17 +3,20 @@ import { Card, CardImg, CardTitle, CardImgOverlay, Breadcrumb, BreadcrumbItem } 
 import {Link} from "react-router-dom";
 import {Loading} from "./LoadingComponent";
 import {baseUrl} from "../shared/baseUrl";
+import {FadeTransform} from 'react-animation-components';
 
 function RenderMenuItem({dish}) {
       return (
-        <Card>
-            <Link to={`/menu/${dish.id}`}>
-                <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
-                <CardImgOverlay>
-                    <CardTitle>{dish.name}</CardTitle>
-                </CardImgOverlay>
-            </Link>
-        </Card>
+          <FadeTransform in tranformProps = {{exitTransform: 'scale(0.5) translateY(-50%)'}}>
+            <Card>
+                <Link to={`/menu/${dish.id}`}>
+                    <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
+                    <CardImgOverlay>
+                        <CardTitle>{dish.name}</CardTitle>
+                    </CardImgOverlay>
+                </Link>
+            </Card>
+          </FadeTransform>
       );
     }
 
@@ -21,14 +24,14 @@ function RenderMenuItem({dish}) {
 
     const Menu = (props) => {
           const menu = props.dishes.dishes.map(
-            (dish) => {
-              return (
-                <div  key={dish.id} className="col-12 col-md-5 m-1">
-                  <RenderMenuItem dish = {dish} />
-                </div>
-              );
-            }
-        );
+                          (dish) => {
+                              return (
+                                  <div key={dish.id} className="col-12 col-md-5 m-1">
+                                      <RenderMenuItem dish={dish}/>
+                                  </div>
+                              );
+                          }
+                      );
 
         if(props.dishes.isLoading) {
             return(

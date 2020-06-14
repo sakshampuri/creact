@@ -1,10 +1,10 @@
 import {
     ADD_COMMENT,
     ADD_COMMENTS,
-    ADD_DISHES, ADD_PROMOS,
+    ADD_DISHES, ADD_FEEDBACK, ADD_LEADERS, ADD_PROMOS,
     COMMENTS_FAILED,
     DISHES_FAILED,
-    DISHES_LOADING, PROMOS_FAILED,
+    DISHES_LOADING, FEEDBACK_FAILED, LEADERS_FAILED, LEADERS_LOADING, PROMOS_FAILED,
     PROMOS_LOADING
 } from "./ActionTypes";
 import {baseUrl} from "../shared/baseUrl";
@@ -163,3 +163,78 @@ export const promosFailed = (errMsg) => (
         payload: errMsg
     }
 );
+
+
+//Assignment 4 leaders fetch using THUNK function
+
+export const fetchLeaders = () => (dispatch) => {
+
+    dispatch(leadersLoading(true));
+
+    return fetch(baseUrl + 'leaders')
+        .then(response => {
+            if(!response.ok)
+                throw new Error(response.status+': '+response.statusText);
+            else
+                return response;
+        }, error => {
+            throw new Error(error.message)
+        })
+        .then(response => response.json())
+        .then(leaders => dispatch(addLeaders(leaders)))
+        .catch(err => dispatch(leadersFailed(err.message)));
+
+}
+
+export const leadersLoading = (isLoading) => (
+    {
+        type: LEADERS_LOADING,
+        payload: isLoading
+    }
+);
+
+export const addLeaders = (leaders) => (
+    {
+        type: ADD_LEADERS,
+        payload: leaders
+
+    }
+);
+
+export const leadersFailed = (errMsg) => (
+    {
+        type: LEADERS_FAILED,
+        payload: errMsg
+    }
+);
+
+export const postFeedback = (values) => (dispatch) => {
+    const feedback =
+        {
+            firstname: values.firstname,
+            lastname: values.lastname,
+            telnum: values.telnum,
+            email: values.email,
+            agree: values.agree,
+            contactType: values.contactType,
+            message: values.message,
+            date: new Date().toISOString()
+        }
+    return fetch(baseUrl + 'feedback', {
+        method: 'POST',
+        body:  JSON.stringify(feedback),
+        headers: {
+            "Content-Type" : 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if(!response.ok)
+                throw new Error(response.status+': '+response.statusText);
+            else
+                return response;
+        }, error => {
+            throw new Error(error.message)
+        })
+        .catch(err => alert(err));
+};
