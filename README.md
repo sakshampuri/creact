@@ -1,4 +1,5 @@
 ### React App bootstrapped with [CRA](https://github.com/facebook/create-react-app)
+---
 
 **Use yarn start to start locally in development mode**
 
