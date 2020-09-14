@@ -3,8 +3,9 @@
 
 **Use yarn start to start locally in development mode**
 
-- Extensice react app with multiple components
+- Extensive react app with multiple components
 - State Management with redux
+  - react-redux and configured store with thunk and logger middleware
 - All other dependencies can be found in the repo
 - This app uses json-server library to mimick a backend rest API
   - To do this, install [json-server](https://www.npmjs.com/package/json-server) globally
